@@ -21,8 +21,8 @@ body {
 
 
 header {
-    background-color: #111;
-    color: white;
+background: linear-gradient(to bottom, #F5F5F5, #FFB347);
+    color:black;
     padding: 20px 8%;
     position: sticky;
     top: 0;
@@ -46,7 +46,7 @@ nav ul {
 }
 
 nav a {
-    color: white;
+    color: black;
     text-decoration: none;
     font-size: 16px;
 }
@@ -70,11 +70,7 @@ nav a:hover {
 
     padding: 60px 20px;
 
-    background: linear-gradient(
-        135deg,
-        #111,
-        #333
-    );
+  background-color:#FFB347 ;
 
     color: white;
 }
@@ -190,6 +186,8 @@ nav a:hover {
     transform: translateY(-8px);
 
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+
+    border: 1px solid grey;
 }
 
 #products article img {
@@ -252,8 +250,30 @@ nav a:hover {
     text-align: center;
 
     background-color: white;
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 40px;
+
+    text-align: center;
 }
 
+.cart_item{
+      display: flex;
+    align-items: center;
+    gap: 20px;
+
+    width: 100%;
+    padding: 20px;
+
+    border: 1px solid #ddd;
+    border-radius: 12px;
+
+    background-color: #f8f8f8;
+
+    box-sizing: border-box;
+
+    margin-bottom: 15px;
+}
 #cart h2 {
     font-size: 36px;
     margin-bottom: 15px;
