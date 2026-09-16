@@ -1,9 +1,19 @@
+fetch("https://fakestoreapi.com/products")
+  .then(res => res.json())
+  .then(data => {
+    products = data;
+    renderProducts(products);
+    renderCart();
+  })
+  .catch(() => {
+    productsEl.innerHTML = "<h2>Products</h2><p>Could not load products.</p>";
+  });  
+
 const productsEl = document.querySelector("#products");
 const cartEl = document.querySelector("#cart");
 const categoryLinks = document.querySelectorAll("#categories a");
 
 let products = [];
-// const cart = [];
 const cart = JSON.parse(localStorage.getItem("cart")) || [];
 function saveCart() {
   localStorage.setItem("cart", JSON.stringify(cart));
@@ -47,10 +57,14 @@ function renderCart() {
 
   const items = cart.map((p, i) => `
     <li>
-      ${p.title} — ${money(p.price)}
+      <img src="${p.image}" alt="${p.title}" width="50" />
+      <span title="${p.title}">${p.title} — ${money(p.price)}</span>
       <button class="remove" data-index="${i}">Remove</button>
     </li>
   `).join("");
+
+  // ... rest of the function stays the same
+
 
   cartEl.innerHTML = `
     <h2>Your Cart</h2>
@@ -60,16 +74,16 @@ function renderCart() {
     <button>Checkout</button>
   `;
 
-  // Attach a click listener to every Remove button
   cartEl.querySelectorAll(".remove").forEach(btn => {
     btn.addEventListener("click", () => {
       const index = Number(btn.dataset.index);
-      cart.splice(index, 1);  
-      saveCart();              
-      renderCart();            
+      cart.splice(index, 1);
+      saveCart();
+      renderCart();
     });
   });
 }
+
 categoryLinks.forEach(link => {
   link.addEventListener("click", e => {
     e.preventDefault();
@@ -79,13 +93,3 @@ categoryLinks.forEach(link => {
   });
 });
 
-fetch("https://fakestoreapi.com/products")
-  .then(res => res.json())
-  .then(data => {
-    products = data;
-    renderProducts(products);
-    renderCart();
-  })
-  .catch(() => {
-    productsEl.innerHTML = "<h2>Products</h2><p>Could not load products.</p>";
-  });  
